@@ -134,6 +134,7 @@ hint.addEventListener('click', function() {
   menuMusic.play();           // un-mute/start menu track
   hint.style.display = 'none';// hide the badge
 }, { once: true });
+});
 
 			animate();
 		}
