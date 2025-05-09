@@ -72,34 +72,34 @@ var Core = new function(){
 	var frames = 0;
 	var menuMusic  = new Audio('assets/menu.mp3');
   	var gameMusic  = new Audio('assets/game.mp3');
-	var hint = document.getElementById('audioHint');
 
 this.init = function() {
 
-    canvas = document.getElementById('world');
-    canvasBackground = document.getElementById('background');
-    panels = document.getElementById('panels');
-    status = document.getElementById('status');
-    message = document.getElementById('message');
-    title = document.getElementById('title');
-    startButton = document.getElementById('startButton');
-    gameOverPanel  = document.getElementById('gameOver');
-    gameOverTitle  = document.getElementById('gameOverTitle');
-    gameOverMessage= document.getElementById('gameOverMessage');
-    restartButton  = document.getElementById('restartButton');
-    winLink        = document.getElementById('winLink');
+  // cache your DOM refs
+  canvas          = document.getElementById('world');
+  canvasBackground= document.getElementById('background');
+  panels          = document.getElementById('panels');
+  status          = document.getElementById('status');
+  message         = document.getElementById('message');
+  title           = document.getElementById('title');
+  startButton     = document.getElementById('startButton');
+  gameOverPanel   = document.getElementById('gameOver');
+  gameOverTitle   = document.getElementById('gameOverTitle');
+  gameOverMessage = document.getElementById('gameOverMessage');
+  restartButton   = document.getElementById('restartButton');
+  winLink         = document.getElementById('winLink');
+  // grab the hint _after_ it's in the DOM
+  var hint        = document.getElementById('audioHint');
 
-    restartButton.addEventListener('click', startButtonClickHandler, false);
+  // hook up restart
+  restartButton.addEventListener('click', startButtonClickHandler, false);
 
-    // grab the hint badge _after_ the DOM exists
-    var hint = document.getElementById('audioHint');
+  if (canvas && canvas.getContext) {
+    context = canvas.getContext('2d');
+    contextBackground = canvasBackground.getContext('2d');
 
-    if (canvas && canvas.getContext) {
-        context = canvas.getContext('2d');
-        contextBackground = canvasBackground.getContext('2d');
-
-        // Register event listeners
-        document.addEventListener('mousemove', documentMouseMoveHandler, false);
+    // event listeners...
+    	document.addEventListener('mousemove', documentMouseMoveHandler, false);
         document.addEventListener('mousedown', documentMouseDownHandler, false);
         document.addEventListener('mouseup', documentMouseUpHandler, false);
         canvas.addEventListener('touchstart', documentTouchStartHandler, false);
@@ -122,21 +122,21 @@ this.init = function() {
             canvas.style.border = 'none';
         }
 
-        // configure your audio
-        menuMusic.loop   = true;
-        menuMusic.volume = 0.4;
-        gameMusic.loop   = true;
-        gameMusic.volume = 0.4;
+         // configure audio
+    menuMusic.loop   = true;
+    menuMusic.volume = 0.4;
+    gameMusic.loop   = true;
+    gameMusic.volume = 0.4;
 
-        // wait for the very first user-gesture to start menuMusic
-        hint.addEventListener('click', function() {
-            menuMusic.play();            // start menu track
-            hint.style.display = 'none'; // hide the hint badge
-        }, { once: true });
+    // only start menuMusic once user clicks the hint
+    hint.addEventListener('click', function() {
+      menuMusic.play();
+      hint.style.display = 'none';
+    }, { once: true });
 
-        // kick off the render loop
-        animate();
-    }
+    // start your game loop
+    animate();
+  }
 };
 
 	function renderBackground() {
