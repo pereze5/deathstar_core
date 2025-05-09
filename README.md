@@ -16,6 +16,9 @@ A Star Wars–themed mini-game built on top of Hakim El Hattab’s original **Co
   * **Game Music**: Pauses menu theme and starts in-game track on start; pauses again on game over.
 * **Polished UX**: Seamless transitions between intro, gameplay, win, and loss states.
 
+## Play Online
+https://pereze5.github.io/deathstar_core/ 
+
 ## Installation
 
 1. Clone the repository:
@@ -31,7 +34,7 @@ A Star Wars–themed mini-game built on top of Hakim El Hattab’s original **Co
 * Click **Start Sequence!** to begin.
 * Rotate your emitter (mouse or touch) and hold **SPACE** to activate the shield.
 * Deflect red torpedoes to survive and let green crystals through to recharge.
-* Survive until you score 2,000+ points to win and claim your prize link!
+* Survive until you score 5,000+ points to win and claim your prize link!
 
 ## Customization
 
