@@ -74,71 +74,70 @@ var Core = new function(){
   	var gameMusic  = new Audio('assets/game.mp3');
 	var hint = document.getElementById('audioHint');
 
-	this.init = function(){
+this.init = function() {
 
-		canvas = document.getElementById('world');
-		canvasBackground = document.getElementById('background');
-		panels = document.getElementById('panels');
-		status = document.getElementById('status');
-		message = document.getElementById('message');
-		title = document.getElementById('title');
-		startButton = document.getElementById('startButton');
-		gameOverPanel  = document.getElementById('gameOver');
-		gameOverTitle  = document.getElementById('gameOverTitle');
-		gameOverMessage= document.getElementById('gameOverMessage');
-		restartButton  = document.getElementById('restartButton');
-		winLink       = document.getElementById('winLink');
+    canvas = document.getElementById('world');
+    canvasBackground = document.getElementById('background');
+    panels = document.getElementById('panels');
+    status = document.getElementById('status');
+    message = document.getElementById('message');
+    title = document.getElementById('title');
+    startButton = document.getElementById('startButton');
+    gameOverPanel  = document.getElementById('gameOver');
+    gameOverTitle  = document.getElementById('gameOverTitle');
+    gameOverMessage= document.getElementById('gameOverMessage');
+    restartButton  = document.getElementById('restartButton');
+    winLink        = document.getElementById('winLink');
 
-		restartButton.addEventListener('click', startButtonClickHandler, false);
-		winLink       = document.getElementById('winLink'); 
+    restartButton.addEventListener('click', startButtonClickHandler, false);
 
+    // grab the hint badge _after_ the DOM exists
+    var hint = document.getElementById('audioHint');
 
-		if (canvas && canvas.getContext) {
-			context = canvas.getContext('2d');
+    if (canvas && canvas.getContext) {
+        context = canvas.getContext('2d');
+        contextBackground = canvasBackground.getContext('2d');
 
-			contextBackground = canvasBackground.getContext('2d');
+        // Register event listeners
+        document.addEventListener('mousemove', documentMouseMoveHandler, false);
+        document.addEventListener('mousedown', documentMouseDownHandler, false);
+        document.addEventListener('mouseup', documentMouseUpHandler, false);
+        canvas.addEventListener('touchstart', documentTouchStartHandler, false);
+        document.addEventListener('touchmove', documentTouchMoveHandler, false);
+        document.addEventListener('touchend', documentTouchEndHandler, false);
+        window.addEventListener('resize', windowResizeHandler, false);
+        startButton.addEventListener('click', startButtonClickHandler, false);
+        document.addEventListener('keydown', documentKeyDownHandler, false);
+        document.addEventListener('keyup', documentKeyUpHandler, false);
 
-			// Register event listeners
-			document.addEventListener('mousemove', documentMouseMoveHandler, false);
-			document.addEventListener('mousedown', documentMouseDownHandler, false);
-			document.addEventListener('mouseup', documentMouseUpHandler, false);
-			canvas.addEventListener('touchstart', documentTouchStartHandler, false);
-			document.addEventListener('touchmove', documentTouchMoveHandler, false);
-			document.addEventListener('touchend', documentTouchEndHandler, false);
-			window.addEventListener('resize', windowResizeHandler, false);
-			startButton.addEventListener('click', startButtonClickHandler, false);
-			document.addEventListener('keydown', documentKeyDownHandler, false);
-			document.addEventListener('keyup', documentKeyUpHandler, false);
+        // Define our player
+        player = new Player();
 
-			// Define our player
-			player = new Player();
+        // Force an initial resize to make sure the UI is sized correctly
+        windowResizeHandler();
 
-			// Force an initial resize to make sure the UI is sized correctly
-			windowResizeHandler();
+        // If we are running on mobile, certain elements need to be configured differently
+        if (isMobile) {
+            status.style.width = world.width + 'px';
+            canvas.style.border = 'none';
+        }
 
-			// If we are running on mobile, certain elements need to be configured differently
-			if( isMobile ) {
-				status.style.width = world.width + 'px';
-				canvas.style.border = 'none';
-			}
-var hint = document.getElementById('audioHint');
+        // configure your audio
+        menuMusic.loop   = true;
+        menuMusic.volume = 0.4;
+        gameMusic.loop   = true;
+        gameMusic.volume = 0.4;
 
-// configure your audio
-menuMusic.loop   = true;
-menuMusic.volume = 0.4;
-gameMusic.loop   = true;
-gameMusic.volume = 0.4;
+        // wait for the very first user-gesture to start menuMusic
+        hint.addEventListener('click', function() {
+            menuMusic.play();            // start menu track
+            hint.style.display = 'none'; // hide the hint badge
+        }, { once: true });
 
-// wait for the very first user-gesture to start menuMusic
-hint.addEventListener('click', function() {
-  menuMusic.play();           // un-mute/start menu track
-  hint.style.display = 'none';// hide the badge
-}, { once: true });
-});
-
-			animate();
-		}
-	};
+        // kick off the render loop
+        animate();
+    }
+};
 
 	function renderBackground() {
 		 // var gradient = …;
