@@ -121,19 +121,19 @@ var Core = new function(){
 				status.style.width = world.width + 'px';
 				canvas.style.border = 'none';
 			}
-// Configure looping & volume
-    menuMusic.loop = true;
-    menuMusic.volume = 0.4;
-    gameMusic.loop = true;
-    gameMusic.volume = 0.4;
+var hint = document.getElementById('audioHint');
 
-     // tiny corner hint
-  
-  hint.addEventListener('click', function() {
-    menuMusic.play();
-    hint.style.display = 'none';
-  }, { once: true });
-});
+// configure your audio
+menuMusic.loop   = true;
+menuMusic.volume = 0.4;
+gameMusic.loop   = true;
+gameMusic.volume = 0.4;
+
+// wait for the very first user-gesture to start menuMusic
+hint.addEventListener('click', function() {
+  menuMusic.play();           // un-mute/start menu track
+  hint.style.display = 'none';// hide the badge
+}, { once: true });
 
 			animate();
 		}
