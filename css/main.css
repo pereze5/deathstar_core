@@ -1,0 +1,237 @@
+/*********************************************
+ * GLOBAL
+ *********************************************/
+
+#background {
+  display: none !important;
+}
+
+/* Font definitions */
+@font-face {
+  font-family: "NewsGothicBold";
+  src: url("../fonts/News Gothic Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "UniversCondensedLight";
+  src: url("../fonts/Univers LT 49 Light Ultra Condensed.ttf") format("truetype");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "StarJedi";
+  src: url("../fonts/galaxy_1.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body, html {
+  overflow: hidden;
+  font-family: "StarJedi", Helvetica, Arial, sans-serif;
+  color: #fff;
+  font-size: 14px;
+  background: #000 url("../images/static-stars.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.no-canvas {
+  color: #999;
+  font-size: 32px;
+  text-align: justify;
+  margin-top: 150px;
+}
+
+/*********************************************
+ * EXPERIMENT STYLES
+ *********************************************/
+
+canvas {
+  border: 0px solid #444;
+  box-shadow: inset 0 0 10px #222;
+  cursor: crosshair;
+  z-index: 1;
+}
+
+#background {
+  border: none;
+  z-index: 0;
+}
+
+.ui {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #ff0; /* yellow HUD tint */
+  text-align: left;
+  padding: 8px;
+  background-color: rgba(0,0,0,0.6);
+  border: 0px solid #ff0;
+  backdrop-filter: blur(2px);
+  float: left;
+}
+
+.ui::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 4px,
+    rgba(255,255,0,0.1) 5px
+  );
+  pointer-events: none;
+}
+
+#status {
+  width: 884px;
+  height: 15px;
+  padding: 8px;
+  display: none;
+  position: absolute;
+  z-index: 2;
+}
+#status span { color: #bbb; font-weight: bold; margin-right: 5px; }
+#status .fps { float: right; }
+
+#panels {
+  width: 100%;
+  position: absolute;
+  z-index: 3;
+  perspective: 800px;
+  perspective-origin: 50% 100%;
+}
+
+/* GAME-OVER OVERLAY */
+#gameOver {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 10;
+  display: none;
+  color: #fff;
+  box-sizing: border-box;
+
+  /* center with flex */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#gameOver .ui {
+  float: none;
+  display: inline-block;
+  margin: 0 auto;
+  max-width: 400px;
+  text-align: center;
+}
+#gameOver .start-button {
+  margin-top: 1em;
+}
+
+
+
+/*********************************************
+ * OPENING CRAWL STYLES
+ *********************************************/
+#message {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 120%; height: 120%;
+  padding: 150px 200px 0 40px;
+  box-sizing: border-box;
+  transform-origin: 50% 100%;
+  transform-style: preserve-3d;
+  animation: crawl 50s linear infinite;
+}
+
+@keyframes crawl {
+  0% {
+    transform: translate3d(-50%, 100%, 0) rotateX(20deg);
+  }
+  100% {
+    transform: translate3d(-50%, -175%, -400px) rotateX(20deg);
+  }
+}
+
+/* Prologue line */
+.crawl-prolog {
+  font-family: "UniversCondensedLight", sans-serif;
+  font-size: 3.6em;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1em;
+}
+
+/* Episode number */
+.crawl-episode {
+  font-family: "NewsGothicBold", sans-serif;
+  font-size: 3em;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Title */
+.crawl-title {
+  font-family: "UniversCondensedLight", sans-serif;
+  font-size: 3.6em;
+  text-align: center;
+  letter-spacing: 0.02em;
+  margin: 0.2em 0 1em;
+}
+
+/* Body of the crawl */
+.crawl-body {
+  font-family: "NewsGothicBold", sans-serif;
+  font-size: 2em;
+  text-align: justify;
+  line-height: 1.4;
+  margin-bottom: 3em;
+}
+
+/* Button in theme font */
+#message .start-button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 2rem;
+  font-family: "StarJedi", sans-serif;
+  border-radius: 4px;
+  margin-top: 20px;
+  background: linear-gradient(45deg, #ffe81f, #ffcd00);
+  color: #000;
+  transition: all .18s linear;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.4);
+}
+#message .start-button:hover {
+  box-shadow:
+    0 0 8px rgba(255,255,255,0.8),
+    0 0 20px rgba(255,0,0,0.6),
+    inset 0 0 5px rgba(255,255,255,0.6);
+  background: #fff;
+}
+
+.ui h2 { margin-bottom: 40px; color: #eee; }
+.ui p em { color: #f5f5f5; }
+.ui ol { margin: 10px 0; padding-left: 1em; }
+.ui ol li { margin: 0 0 2px; list-style: unset; }
+.ui a.external {
+  outline: none;
+  font-family: sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  text-decoration: none;
+  color: #bbb;
+  display: inline;
+  padding: 0;
+}
+.ui a.external:hover { color: #fff; }
+
+@media screen and (max-width: 600px) {
+  #message { padding: 60px 40px; }
+}
+
+

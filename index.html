@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Death Star Defense</title>
+  <!-- RESET -->
+  <link rel="stylesheet" href="css/reset.css">
+  <!-- STAR WARS THEME -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <!-- Status bar overlay (hidden until game start) -->
+  <div id="status" class="ui"></div>
+
+  <!-- Intro crawl panel -->
+  <div id="panels">
+    <div id="message" class="ui">
+      <p class="crawl-prolog">
+        A long time ago in a galaxy far, far away…
+      </p>
+      <div class="crawl-header">
+        <h2 class="crawl-episode">EPISODE I</h2>
+        <h2 id="title" class="crawl-title">DEATH STAR DEFENSE</h2>
+      </div>
+      <p class="crawl-body">
+        It is a dark time for the Empire. Rebel saboteurs have breached the reactor trench of the Death Star,
+        launching proton torpedoes at its kyber-crystal heart.
+      </p>
+      <p class="crawl-body">
+        You are the shield-operator. Rotate the emitter and hold <strong>SPACE</strong> to unleash your energy shield arc—
+        deflect every red torpedo before it pierces the core!
+      </p>
+      <p class="crawl-body">
+        Meanwhile, Imperial supply drones arrive with vital shield-crystals (green): allow them to pass through your shield
+        and restore reactor power, or risk the final weapon’s destruction…
+      </p>
+      <button id="startButton" class="start-button">Start Sequence!</button>
+    </div>
+  </div>
+
+  <!-- Game Over / Win Screen -->
+  <div id="gameOver" class="ui" style="display:none; text-align:center;">
+    <h2 id="gameOverTitle"></h2>
+    <p id="gameOverMessage"></p>
+    <button id="restartButton" class="start-button">Restart</button>
+    <a
+      id="winLink"
+      class="start-button"
+      href="https://www.hamburger-kunsthalle.de/de/vorverkauf-rendezvous-der-traeume"
+      target="_blank"
+      style="display:none; margin-top:1em;"
+    >
+      Claim your prize!
+    </a>
+  </div>
+
+  <!-- Canvases for the game -->
+  <canvas id="world">
+    <p class="no-canvas">
+      You need a modern browser to view this game.
+    </p>
+  </canvas>
+  <canvas id="background"></canvas>
+
+  <!-- Game scripts -->
+  <script src="js/timbre.js"></script>
+  <script src="js/core-audio.js"></script>
+  <script src="js/core.js"></script>
+</body>
+</html>
