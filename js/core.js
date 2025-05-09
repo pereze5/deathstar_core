@@ -73,71 +73,69 @@ var Core = new function(){
 	var menuMusic  = new Audio('assets/menu.mp3');
   	var gameMusic  = new Audio('assets/game.mp3');
 
-this.init = function() {
 
-  // cache your DOM refs
-  canvas          = document.getElementById('world');
-  canvasBackground= document.getElementById('background');
-  panels          = document.getElementById('panels');
-  status          = document.getElementById('status');
-  message         = document.getElementById('message');
-  title           = document.getElementById('title');
-  startButton     = document.getElementById('startButton');
-  gameOverPanel   = document.getElementById('gameOver');
-  gameOverTitle   = document.getElementById('gameOverTitle');
-  gameOverMessage = document.getElementById('gameOverMessage');
-  restartButton   = document.getElementById('restartButton');
-  winLink         = document.getElementById('winLink');
-  // grab the hint _after_ it's in the DOM
-  var hint        = document.getElementById('audioHint');
+	this.init = function(){
 
-  // hook up restart
-  restartButton.addEventListener('click', startButtonClickHandler, false);
+		canvas = document.getElementById('world');
+		canvasBackground = document.getElementById('background');
+		panels = document.getElementById('panels');
+		status = document.getElementById('status');
+		message = document.getElementById('message');
+		title = document.getElementById('title');
+		startButton = document.getElementById('startButton');
+		gameOverPanel  = document.getElementById('gameOver');
+		gameOverTitle  = document.getElementById('gameOverTitle');
+		gameOverMessage= document.getElementById('gameOverMessage');
+		restartButton  = document.getElementById('restartButton');
+		winLink       = document.getElementById('winLink');
 
-  if (canvas && canvas.getContext) {
-    context = canvas.getContext('2d');
-    contextBackground = canvasBackground.getContext('2d');
+		restartButton.addEventListener('click', startButtonClickHandler, false);
+		winLink       = document.getElementById('winLink'); 
 
-    // event listeners...
-    	document.addEventListener('mousemove', documentMouseMoveHandler, false);
-        document.addEventListener('mousedown', documentMouseDownHandler, false);
-        document.addEventListener('mouseup', documentMouseUpHandler, false);
-        canvas.addEventListener('touchstart', documentTouchStartHandler, false);
-        document.addEventListener('touchmove', documentTouchMoveHandler, false);
-        document.addEventListener('touchend', documentTouchEndHandler, false);
-        window.addEventListener('resize', windowResizeHandler, false);
-        startButton.addEventListener('click', startButtonClickHandler, false);
-        document.addEventListener('keydown', documentKeyDownHandler, false);
-        document.addEventListener('keyup', documentKeyUpHandler, false);
 
-        // Define our player
-        player = new Player();
+		if (canvas && canvas.getContext) {
+			context = canvas.getContext('2d');
 
-        // Force an initial resize to make sure the UI is sized correctly
-        windowResizeHandler();
+			contextBackground = canvasBackground.getContext('2d');
 
-        // If we are running on mobile, certain elements need to be configured differently
-        if (isMobile) {
-            status.style.width = world.width + 'px';
-            canvas.style.border = 'none';
-        }
+			// Register event listeners
+			document.addEventListener('mousemove', documentMouseMoveHandler, false);
+			document.addEventListener('mousedown', documentMouseDownHandler, false);
+			document.addEventListener('mouseup', documentMouseUpHandler, false);
+			canvas.addEventListener('touchstart', documentTouchStartHandler, false);
+			document.addEventListener('touchmove', documentTouchMoveHandler, false);
+			document.addEventListener('touchend', documentTouchEndHandler, false);
+			window.addEventListener('resize', windowResizeHandler, false);
+			startButton.addEventListener('click', startButtonClickHandler, false);
+			document.addEventListener('keydown', documentKeyDownHandler, false);
+			document.addEventListener('keyup', documentKeyUpHandler, false);
 
-         // configure audio
-    menuMusic.loop   = true;
+			// Define our player
+			player = new Player();
+
+			// Force an initial resize to make sure the UI is sized correctly
+			windowResizeHandler();
+
+			// If we are running on mobile, certain elements need to be configured differently
+			if( isMobile ) {
+				status.style.width = world.width + 'px';
+				canvas.style.border = 'none';
+			}
+// Configure looping & volume
+    menuMusic.loop = true;
     menuMusic.volume = 0.4;
-    gameMusic.loop   = true;
+    gameMusic.loop = true;
     gameMusic.volume = 0.4;
 
-    // only start menuMusic once user clicks the hint
-    hint.addEventListener('click', function() {
-      menuMusic.play();
-      hint.style.display = 'none';
-    }, { once: true });
+    // Start the menu track right away
+    panels.addEventListener('click', function once() {
+  menuMusic.play();
+  panels.removeEventListener('click', once);
+});
 
-    // start your game loop
-    animate();
-  }
-};
+			animate();
+		}
+	};
 
 	function renderBackground() {
 		 // var gradient = …;
