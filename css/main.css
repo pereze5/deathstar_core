@@ -82,6 +82,7 @@ canvas {
   pointer-events: none;
 }
 
+/* Status bar (now includes border-box sizing) */
 #status {
   width: 884px;
   height: 15px;
@@ -89,17 +90,29 @@ canvas {
   display: none;
   position: absolute;
   z-index: 2;
+  box-sizing: border-box;
 }
-#status span { color: #bbb; font-weight: bold; margin-right: 5px; }
-#status .fps { float: right; }
+#status span {
+  color: #bbb;
+  font-weight: bold;
+  margin-right: 5px;
+}
+#status .fps {
+  float: right;
+}
 
+/* Intro panels crawl, inset by the 6px border on each side */
 #panels {
-  width: 100%;
   position: absolute;
   z-index: 3;
   perspective: 800px;
   perspective-origin: 50% 100%;
+  box-sizing: border-box;
+  /* full width minus left+right borders (2×6px = 12px) */
+  width: calc(100% - 12px);
+  left: 6px; /* match your BORDER_WIDTH constant */
 }
+
 
 /* GAME-OVER OVERLAY */
 #gameOver {
