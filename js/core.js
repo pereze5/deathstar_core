@@ -72,7 +72,7 @@ var Core = new function(){
 	var frames = 0;
 	var menuMusic  = new Audio('assets/menu.mp3');
   	var gameMusic  = new Audio('assets/game.mp3');
-
+	var overlay = document.getElementById('audioOverlay');
 
 	this.init = function(){
 
@@ -128,9 +128,10 @@ var Core = new function(){
     gameMusic.volume = 0.4;
 
     // Start the menu track right away
-    panels.addEventListener('click', function once() {
-  menuMusic.play();
-  panels.removeEventListener('click', once);
+   overlay.addEventListener('click', function() {
+    menuMusic.play();
+    overlay.style.display = 'none';
+  }, { once: true });
 });
 
 			animate();
