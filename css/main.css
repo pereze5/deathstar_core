@@ -1,6 +1,7 @@
 /*********************************************
  * GLOBAL
  *********************************************/
+/* put it behind the UI but above the background canvas */
 
 #background {
   display: none !important;
@@ -100,6 +101,20 @@ canvas {
   perspective: 800px;
   perspective-origin: 50% 100%;
 }
+
+#clickHint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;            /* now above canvas (z-index:1) but under panels/status */
+  pointer-events: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 1.2rem;
+  font-family: sans-serif;
+  text-shadow: 0 0 6px rgba(0,0,0,0.8);
+}
+
 
 /* GAME-OVER OVERLAY */
 #gameOver {
