@@ -9,7 +9,7 @@ A Star Wars–themed mini-game built on top of Hakim El Hattab’s original **Co
 * **Game Logic**:
 
   * Reset and start: Clicking **Start** resets score, difficulty, timers, player energy, and organism lists.
-  * Win/Lose Conditions: Lose when energy drops to zero; win when you exceed **2,000 points**. Shows either a **Restart** button or a **prize-claim link**.
+  * Win/Lose Conditions: Lose when energy drops to zero; win when you exceed **5,000 points**. Shows either a **Restart** button or a **prize-claim link**.
 * **Audio**:
 
   * **Menu Music**: Loops silently until user interaction (to meet autoplay policies), then plays on page load.
