@@ -593,7 +593,7 @@ var Core = new function(){
 			scoreText += ' <p class="fps">FPS: <span>' + Math.round( fps ) + ' ('+Math.round(Math.max(Math.min(fps/FRAMERATE, FRAMERATE), 0)*100)+'%)</span></p>';
 
 			// 1) WIN?
-if( score >= 200 && playing ){
+if( score >= 2000 && playing ){
   playing = false;
   panels.style.display     = 'none';
   status.style.display     = 'none';
