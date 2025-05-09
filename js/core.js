@@ -72,7 +72,6 @@ var Core = new function(){
 	var frames = 0;
 	var menuMusic  = new Audio('assets/menu.mp3');
   	var gameMusic  = new Audio('assets/game.mp3');
-	var overlay = document.getElementById('audioOverlay');
 
 	this.init = function(){
 
@@ -127,10 +126,11 @@ var Core = new function(){
     gameMusic.loop = true;
     gameMusic.volume = 0.4;
 
-    // Start the menu track right away
-   overlay.addEventListener('click', function() {
+     // tiny corner hint
+  var hint = document.getElementById('audioHint');
+  hint.addEventListener('click', function() {
     menuMusic.play();
-    overlay.style.display = 'none';
+    hint.style.display = 'none';
   }, { once: true });
 });
 
