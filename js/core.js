@@ -72,6 +72,7 @@ var Core = new function(){
 	var frames = 0;
 	var menuMusic  = new Audio('assets/menu.mp3');
   	var gameMusic  = new Audio('assets/game.mp3');
+	var hint = document.getElementById('audioHint');
 
 	this.init = function(){
 
@@ -127,7 +128,7 @@ var Core = new function(){
     gameMusic.volume = 0.4;
 
      // tiny corner hint
-  var hint = document.getElementById('audioHint');
+  
   hint.addEventListener('click', function() {
     menuMusic.play();
     hint.style.display = 'none';
