@@ -14,7 +14,6 @@ A Star Wars–themed mini-game built on top of Hakim El Hattab’s original **Co
 
   * **Menu Music**: Loops silently until user interaction (to meet autoplay policies), then plays on page load.
   * **Game Music**: Pauses menu theme and starts in-game track on start; pauses again on game over.
-* **Polished UX**: Seamless transitions between intro, gameplay, win, and loss states.
 
 ## Play Online
 https://pereze5.github.io/deathstar_core/ 
