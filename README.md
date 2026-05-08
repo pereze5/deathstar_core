@@ -23,7 +23,7 @@ https://pereze5.github.io/deathstar_core/
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/<your-username>/death-star-defense.git
+   git clone https://github.com/pereze5/death-star-defense.git
    ```
 2. Open `index.html` in your browser.
 3. Ensure `assets/menu.mp3` and `assets/game.mp3` are in place for audio.
